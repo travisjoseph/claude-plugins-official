@@ -72,10 +72,56 @@ Initial request: $ARGUMENTS
 **Actions**:
 1. Review the codebase findings and original feature request
 2. Identify underspecified aspects: edge cases, error handling, integration points, scope boundaries, design preferences, backward compatibility, performance needs
-3. **Present all questions to the user in a clear, organized list**
+3. **Use AskUserQuestion tool to present questions interactively** (up to 4 questions at once)
 4. **Wait for answers before proceeding to architecture design**
 
-If the user says "whatever you think is best", provide your recommendation and get explicit confirmation.
+**Structuring questions with options:**
+
+For each clarifying question, provide 2-4 sensible options based on:
+- Common patterns found in the codebase
+- Industry best practices
+- Trade-offs between approaches
+
+"Other" option is automatically added for custom input.
+
+**Question categories and example options:**
+
+- **Error handling**: "Throw exception (Recommended)", "Return error object", "Log and continue", "Silent fail"
+- **Scope boundaries**: "Just feature X", "X + basic Y", "Full implementation", "Minimal MVP"
+- **Integration points**: "Use existing ServiceA", "Create new service", "Hybrid approach"
+- **Design preferences**: "Match ComponentX pattern", "New pattern", "Refactor existing"
+- **Performance needs**: "Optimize for speed", "Optimize for memory", "Balanced", "Not critical"
+- **Backward compatibility**: "Maintain all compatibility", "Breaking change OK", "Deprecation period"
+
+**Example using AskUserQuestion:**
+```
+AskUserQuestion(questions=[
+  {
+    "question": "How should we handle validation errors?",
+    "header": "Error handling",
+    "multiSelect": false,
+    "options": [
+      {"label": "Throw exception (Recommended)", "description": "Matches existing pattern in AuthService"},
+      {"label": "Return error object", "description": "More functional approach, explicit handling"},
+      {"label": "Log and continue", "description": "Non-blocking, may hide issues"}
+    ]
+  },
+  {
+    "question": "What's the scope for this feature?",
+    "header": "Scope",
+    "multiSelect": false,
+    "options": [
+      {"label": "Just user authentication", "description": "Core functionality only"},
+      {"label": "Auth + basic permissions", "description": "Include role checks"},
+      {"label": "Full auth system", "description": "Auth, permissions, audit logs"}
+    ]
+  }
+])
+```
+
+If question is truly open-ended with no clear options, make it a yes/no or provide directional options.
+
+If the user selects "Other", they provide custom text input.
 
 ---
 

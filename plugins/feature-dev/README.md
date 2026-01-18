@@ -94,18 +94,31 @@ Key files to understand:
   - Integration points
   - Backward compatibility
   - Performance needs
-- Presents all questions in an organized list
+- **Presents questions interactively** using AskUserQuestion (up to 4 at once)
+- Navigate between questions with left/right arrows
+- Each question has 2-4 options based on codebase patterns
+- "Other" option always available for custom input
 - **Waits for your answers before proceeding**
 
 **Example:**
 ```
-Before designing the architecture, I need to clarify:
+Question 1 of 3: Which OAuth providers should we support?
+○ Google only
+○ Google + GitHub (Recommended)
+○ All major providers
+○ Other
 
-1. OAuth provider: Which OAuth providers? (Google, GitHub, custom?)
-2. User data: Store OAuth tokens or just user profile?
-3. Existing auth: Replace current auth or add alongside?
-4. Sessions: Integrate with existing session management?
-5. Error handling: How to handle OAuth failures?
+Question 2 of 3: How should we handle OAuth failures?
+○ Throw exception (matches existing pattern)
+○ Return error object
+○ Redirect to error page
+○ Other
+
+Question 3 of 3: Should we integrate with existing sessions?
+○ Yes, use SessionManager (Recommended)
+○ No, separate OAuth sessions
+○ Hybrid approach
+○ Other
 ```
 
 **Critical**: This phase ensures nothing is ambiguous before design begins.
