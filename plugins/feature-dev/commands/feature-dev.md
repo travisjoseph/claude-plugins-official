@@ -14,6 +14,7 @@ You are helping a developer implement a new feature. Follow a systematic approac
 - **Read files identified by agents**: When launching agents, ask them to return lists of the most important files to read. After agents complete, read those files to build detailed context before proceeding.
 - **Simple and elegant**: Prioritize readable, maintainable, architecturally sound code
 - **Use TodoWrite**: Track all progress throughout
+- **Frontend/UX work**: When feature involves UI, styling, components, pages, or UX - use frontend-design skill for planning and implementation
 
 ---
 
@@ -92,6 +93,9 @@ For each clarifying question, provide 2-4 sensible options based on:
 - **Design preferences**: "Match ComponentX pattern", "New pattern", "Refactor existing"
 - **Performance needs**: "Optimize for speed", "Optimize for memory", "Balanced", "Not critical"
 - **Backward compatibility**: "Maintain all compatibility", "Breaking change OK", "Deprecation period"
+- **UX/Visual design** (for frontend features): "Match existing design system", "New distinctive design", "Minimal/functional", "Highly polished"
+- **Component scope** (for UI features): "Single component", "Component + variants", "Full page/section", "Multi-page flow"
+- **Responsive behavior**: "Mobile-first", "Desktop-first", "Mobile-only", "Desktop-only"
 
 **Example using AskUserQuestion:**
 ```
@@ -129,6 +133,10 @@ If the user selects "Other", they provide custom text input.
 
 **Goal**: Design multiple implementation approaches with different trade-offs
 
+**Frontend/UX detection**: If feature involves UI components, pages, styling, or UX (navigation, interactions, layouts, visual design), **invoke frontend-design skill** instead of code-architect agents. Use: `Skill(skill="frontend-design:frontend-design", args="[feature description]")`
+
+**For backend/non-UI features:**
+
 **Actions**:
 1. Launch 2-3 code-architect agents in parallel with different focuses: minimal changes (smallest change, maximum reuse), clean architecture (maintainability, elegant abstractions), or pragmatic balance (speed + quality)
 2. Review all approaches and form your opinion on which fits best for this specific task (consider: small fix vs large feature, urgency, complexity, team context)
@@ -142,6 +150,17 @@ If the user selects "Other", they provide custom text input.
 **Goal**: Build the feature
 
 **DO NOT START WITHOUT USER APPROVAL**
+
+**Frontend/UX implementation**: If feature involves UI components, pages, styling, or UX, **invoke frontend-design skill** for implementation. Use: `Skill(skill="frontend-design:frontend-design", args="[implementation details from architecture phase]")`
+
+The frontend-design skill will handle:
+- Component creation with production-grade design
+- Styling and visual polish
+- UX interactions and animations
+- Responsive layouts
+- Accessibility considerations
+
+**For backend/non-UI features:**
 
 **Actions**:
 1. Wait for explicit user approval

@@ -127,6 +127,10 @@ Question 3 of 3: Should we integrate with existing sessions?
 
 **Goal**: Design multiple implementation approaches
 
+**Frontend/UX features**: If feature involves UI components, pages, styling, or UX, automatically invokes `frontend-design` skill instead of code-architect agents. The frontend-design skill provides production-grade design planning and distinctive visual approaches.
+
+**For backend/non-UI features:**
+
 **What happens:**
 - Launches 2-3 `code-architect` agents with different focuses:
   - **Minimal changes**: Smallest change, maximum reuse
@@ -171,6 +175,15 @@ Which approach would you like to use?
 ### Phase 5: Implementation
 
 **Goal**: Build the feature
+
+**Frontend/UX implementation**: If feature involves UI components, pages, styling, or UX, automatically invokes `frontend-design` skill for implementation. This provides:
+- Production-grade component design
+- Distinctive visual styling
+- UX interactions and animations
+- Responsive layouts
+- Accessibility considerations
+
+**For backend/non-UI features:**
 
 **What happens:**
 - **Waits for explicit approval** before starting
