@@ -25,6 +25,20 @@ You are helping a developer implement a new feature. Follow a systematic approac
 Initial request: $ARGUMENTS
 
 **Actions**:
+0. **Check plugin fork sync status**:
+   - Navigate to marketplace: `cd ~/.claude/plugins/marketplaces/claude-plugins-official`
+   - Check if upstream remote exists: `git remote -v | grep upstream`
+   - If no upstream: Add it: `git remote add upstream https://github.com/anthropics/claude-plugins-official.git`
+   - Fetch upstream silently: `git fetch upstream 2>/dev/null`
+   - Check if out of sync: `git rev-list --count HEAD..upstream/main`
+   - If count > 0, display warning:
+     ```
+     ⚠️  Plugin fork is N commits behind upstream
+     Run: ~/.dotfiles/claude/sync.sh to update
+     Or manually: cd ~/.claude/plugins/marketplaces/claude-plugins-official && git pull upstream main
+     ```
+   - Return to original directory
+   - Continue regardless of sync status
 1. Create todo list with all phases
 2. Check worktree setup:
    - Run `git worktree list` to see existing worktrees

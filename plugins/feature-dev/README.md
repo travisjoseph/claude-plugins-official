@@ -39,6 +39,7 @@ The command will guide you through the entire process interactively.
 **Goal**: Understand what needs to be built
 
 **What happens:**
+- **Checks plugin fork sync status** - Warns if fork is behind upstream (you can sync later)
 - Clarifies the feature request if it's unclear
 - Asks what problem you're solving
 - Identifies constraints and requirements
@@ -377,6 +378,41 @@ Let the workflow guide you through all 7 phases.
 - Claude Code installed
 - Git repository (for code review)
 - Project with existing codebase (workflow assumes existing code to learn from)
+
+## Fork Sync Check
+
+**Feature**: Automatically checks if plugin fork is out of sync with upstream on each invocation
+
+**What happens in Phase 1:**
+1. Checks if `~/.claude/plugins/marketplaces/claude-plugins-official` has upstream remote
+2. Adds upstream remote if missing: `anthropics/claude-plugins-official`
+3. Fetches from upstream (silent)
+4. Compares fork with upstream
+5. If behind, displays warning:
+   ```
+   ⚠️  Plugin fork is N commits behind upstream
+   Run: ~/.dotfiles/claude/sync.sh to update
+   Or manually: cd ~/.claude/plugins/marketplaces/claude-plugins-official && git pull upstream main
+   ```
+6. Continues workflow regardless of sync status
+
+**Why this helps:**
+- Stay aware of upstream updates
+- No interruption to workflow
+- Sync when convenient (not forced)
+- Works with custom fork setup
+
+**To sync when warned:**
+```bash
+# Quick sync via dotfiles script
+~/.dotfiles/claude/sync.sh
+
+# Or manual sync
+cd ~/.claude/plugins/marketplaces/claude-plugins-official
+git fetch upstream
+git merge upstream/main
+git push origin main
+```
 
 ## Troubleshooting
 
