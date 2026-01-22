@@ -1,216 +1,408 @@
 # Skills Recommendations
 
-Skills are packaged expertise with workflows, reference materials, and best practices that Claude can invoke for specialized tasks.
+Skills are packaged expertise with workflows, reference materials, and best practices. Create them in `.claude/skills/<name>/SKILL.md`. Skills can be invoked by Claude automatically when relevant, or by users directly with `/skill-name`.
 
-## Built-in Agents
+Some pre-built skills are available through official plugins (install via `/plugin install`).
 
-### Plan Agent
-**Best for**: Complex implementations needing architectural planning
-
-| Recommend When | Examples |
-|----------------|----------|
-| Multi-file changes needed | New feature development |
-| Architectural decisions | System design |
-| Unknown scope | Needs investigation first |
-| Multiple valid approaches | Trade-off analysis |
-
-**Value**: Thinks through implementation before coding, identifies files to change, considers edge cases.
-
-### Explore Agent
-**Best for**: Understanding large or unfamiliar codebases
-
-| Recommend When | Examples |
-|----------------|----------|
-| Large codebase (>500 files) | Navigate efficiently |
-| New to the project | Understand structure |
-| Finding patterns | How is X done? |
-| Debugging | Trace execution paths |
-
-**Value**: Quickly searches, reads, and synthesizes information across many files.
+**Note**: These are common patterns. Use web search to find skill ideas specific to the codebase's tools and frameworks.
 
 ---
 
-## Document Creation Skills
+## Available from Official Plugins
 
-### docx (Word Documents)
-**Best for**: Creating and editing Word documents
+### Plugin Development (plugin-dev)
 
-| Recommend When | Examples |
-|----------------|----------|
-| Report generation | Technical reports |
-| Contract templates | Legal documents |
-| Documentation export | Share with non-developers |
-| Tracked changes | Review workflows |
+| Skill | Best For |
+|-------|----------|
+| **skill-development** | Creating new skills with proper structure |
+| **hook-development** | Building hooks for automation |
+| **command-development** | Creating slash commands |
+| **agent-development** | Building specialized subagents |
+| **mcp-integration** | Integrating MCP servers into plugins |
+| **plugin-structure** | Understanding plugin architecture |
 
-### xlsx (Spreadsheets)
-**Best for**: Creating and analyzing Excel files
+### Git Workflows (commit-commands)
 
-| Recommend When | Examples |
-|----------------|----------|
-| Data analysis | Process CSV/Excel data |
-| Report generation | Formatted tables |
-| Financial models | Formulas and calculations |
-| Data transformation | Clean and reshape data |
+| Skill | Best For |
+|-------|----------|
+| **commit** | Creating git commits with proper messages |
+| **commit-push-pr** | Full commit, push, and PR workflow |
 
-### pptx (Presentations)
-**Best for**: Creating PowerPoint presentations
+### Frontend (frontend-design)
 
-| Recommend When | Examples |
-|----------------|----------|
-| Technical presentations | Architecture diagrams |
-| Project updates | Status slides |
-| Demo decks | Feature walkthroughs |
-| Training materials | Educational content |
-
-### pdf (PDF Documents)
-**Best for**: PDF manipulation and creation
-
-| Recommend When | Examples |
-|----------------|----------|
-| Form filling | Complete PDF forms |
-| Document merging | Combine files |
-| Text extraction | Parse PDF content |
-| PDF generation | Create from data |
-
----
-
-## Frontend & Design Skills
-
-### frontend-design
-**Best for**: Creating polished, production-ready UI components
-
-| Recommend When | Examples |
-|----------------|----------|
-| UI component work | React, Vue, Angular |
-| Landing pages | Marketing sites |
-| Dashboard design | Data visualization |
-| Design system work | Component libraries |
+| Skill | Best For |
+|-------|----------|
+| **frontend-design** | Creating polished UI components |
 
 **Value**: Creates distinctive, high-quality UI instead of generic AI aesthetics.
 
-### canvas-design
-**Best for**: Creating visual art and static designs
+### Automation Rules (hookify)
 
-| Recommend When | Examples |
-|----------------|----------|
-| Poster creation | Marketing materials |
-| Visual diagrams | Architecture visuals |
-| Infographics | Data visualization |
+| Skill | Best For |
+|-------|----------|
+| **writing-rules** | Creating hookify rules for automation |
 
-### algorithmic-art
-**Best for**: Generative art with p5.js
+### Feature Development (feature-dev)
 
-| Recommend When | Examples |
-|----------------|----------|
-| Interactive visuals | Creative coding |
-| Generative patterns | Flow fields, particles |
-| Data art | Algorithmic visualization |
-
-### theme-factory
-**Best for**: Applying themes to artifacts
-
-| Recommend When | Examples |
-|----------------|----------|
-| Brand consistency | Apply company colors |
-| Document styling | Professional look |
-| Presentation themes | Consistent decks |
-
-### brand-guidelines
-**Best for**: Applying Anthropic brand styling
-
-| Recommend When | Examples |
-|----------------|----------|
-| Anthropic materials | Official branding |
-| Partner materials | Co-branded content |
+| Skill | Best For |
+|-------|----------|
+| **feature-dev** | End-to-end feature development workflow |
 
 ---
 
-## Development Skills
+## Quick Reference: Official Plugin Skills
 
-### mcp-builder
-**Best for**: Creating MCP servers to extend Claude
-
-| Recommend When | Examples |
-|----------------|----------|
-| Custom tool needs | Internal APIs |
-| API integrations | Third-party services |
-| Workflow automation | Custom tooling |
-
-**Value**: Guides creation of well-designed MCP servers in Python (FastMCP) or TypeScript.
-
-### webapp-testing
-**Best for**: Testing web applications with Playwright
-
-| Recommend When | Examples |
-|----------------|----------|
-| UI testing needs | Verify functionality |
-| Visual debugging | Screenshot issues |
-| Browser automation | Interactive testing |
-| Console log analysis | Debug JS errors |
-
-### skill-creator
-**Best for**: Creating new skills for Claude
-
-| Recommend When | Examples |
-|----------------|----------|
-| Repeatable workflows | Standardize processes |
-| Domain expertise | Package knowledge |
-| Team patterns | Share best practices |
+| Codebase Signal | Skill | Plugin |
+|-----------------|-------|--------|
+| Building plugins | skill-development | plugin-dev |
+| Git commits | commit | commit-commands |
+| React/Vue/Angular | frontend-design | frontend-design |
+| Automation rules | writing-rules | hookify |
+| Feature planning | feature-dev | feature-dev |
 
 ---
 
-## Collaboration Skills
+## Custom Project Skills
 
-### doc-coauthoring
-**Best for**: Co-authoring documentation with users
+Create project-specific skills in `.claude/skills/<name>/SKILL.md`.
 
-| Recommend When | Examples |
-|----------------|----------|
-| Technical specs | RFC documents |
-| Decision docs | ADRs |
-| Proposals | Feature proposals |
-| Documentation | User guides |
+### Skill Structure
 
-**Value**: Structured workflow for iterative document refinement.
+```
+.claude/skills/
+└── my-skill/
+    ├── SKILL.md           # Main instructions (required)
+    ├── template.yaml      # Template to apply
+    ├── scripts/
+    │   └── validate.sh    # Script to run
+    └── examples/          # Reference examples
+```
 
-### internal-comms
-**Best for**: Writing internal communications
+### Frontmatter Reference
 
-| Recommend When | Examples |
-|----------------|----------|
-| Status reports | Project updates |
-| Announcements | Team comms |
-| Incident reports | Post-mortems |
-| FAQs | Knowledge sharing |
+```yaml
+---
+name: skill-name
+description: What this skill does and when to use it
+disable-model-invocation: true  # Only user can invoke (for side effects)
+user-invocable: false           # Only Claude can invoke (for background knowledge)
+allowed-tools: Read, Grep, Glob # Restrict tool access
+context: fork                   # Run in isolated subagent
+agent: Explore                  # Which agent type when forked
+---
+```
+
+### Invocation Control
+
+| Setting | User | Claude | Use for |
+|---------|------|--------|---------|
+| (default) | ✓ | ✓ | General-purpose skills |
+| `disable-model-invocation: true` | ✓ | ✗ | Side effects (deploy, send) |
+| `user-invocable: false` | ✗ | ✓ | Background knowledge |
 
 ---
 
-## Multimedia Skills
+## Custom Skill Examples
 
-### slack-gif-creator
-**Best for**: Creating animated GIFs for Slack
+### API Documentation with OpenAPI Template
 
-| Recommend When | Examples |
-|----------------|----------|
-| Team celebrations | Achievements |
-| Demo animations | Feature previews |
-| Fun reactions | Custom emoji-style GIFs |
+Apply a YAML template to generate consistent API docs:
+
+```
+.claude/skills/api-doc/
+├── SKILL.md
+└── openapi-template.yaml
+```
+
+**SKILL.md:**
+```yaml
+---
+name: api-doc
+description: Generate OpenAPI documentation for an endpoint. Use when documenting API routes.
+---
+
+Generate OpenAPI documentation for the endpoint at $ARGUMENTS.
+
+Use the template in [openapi-template.yaml](openapi-template.yaml) as the structure.
+
+1. Read the endpoint code
+2. Extract path, method, parameters, request/response schemas
+3. Fill in the template with actual values
+4. Output the completed YAML
+```
+
+**openapi-template.yaml:**
+```yaml
+paths:
+  /{path}:
+    {method}:
+      summary: ""
+      description: ""
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema: {}
+```
 
 ---
 
-## Quick Reference: Detection Patterns
+### Database Migration Generator with Script
 
-| Look For | Suggests Skill |
-|----------|---------------|
-| Complex task, multiple files | Plan agent |
-| "How does X work?" | Explore agent |
-| `.docx` files or doc requests | docx skill |
-| `.xlsx` files or spreadsheet work | xlsx skill |
-| Presentation needs | pptx skill |
-| PDF files to process | pdf skill |
-| React/Vue/Angular components | frontend-design |
-| UI design requests | canvas-design |
-| Testing local web app | webapp-testing |
-| "Build an MCP server" | mcp-builder |
-| Documentation writing | doc-coauthoring |
-| Internal announcement | internal-comms |
+Generate and validate migrations using a bundled script:
+
+```
+.claude/skills/create-migration/
+├── SKILL.md
+└── scripts/
+    └── validate-migration.sh
+```
+
+**SKILL.md:**
+```yaml
+---
+name: create-migration
+description: Create a database migration file
+disable-model-invocation: true
+allowed-tools: Read, Write, Bash
+---
+
+Create a migration for: $ARGUMENTS
+
+1. Generate migration file in `migrations/` with timestamp prefix
+2. Include up and down functions
+3. Run validation: `bash ~/.claude/skills/create-migration/scripts/validate-migration.sh`
+4. Report any issues found
+```
+
+**scripts/validate-migration.sh:**
+```bash
+#!/bin/bash
+# Validate migration syntax
+npx prisma validate 2>&1 || echo "Validation failed"
+```
+
+---
+
+### Test Generator with Examples
+
+Generate tests following project patterns:
+
+```
+.claude/skills/gen-test/
+├── SKILL.md
+└── examples/
+    ├── unit-test.ts
+    └── integration-test.ts
+```
+
+**SKILL.md:**
+```yaml
+---
+name: gen-test
+description: Generate tests for a file following project conventions
+disable-model-invocation: true
+---
+
+Generate tests for: $ARGUMENTS
+
+Reference these examples for the expected patterns:
+- Unit tests: [examples/unit-test.ts](examples/unit-test.ts)
+- Integration tests: [examples/integration-test.ts](examples/integration-test.ts)
+
+1. Analyze the source file
+2. Identify functions/methods to test
+3. Generate tests matching project conventions
+4. Place in appropriate test directory
+```
+
+---
+
+### Component Generator with Template
+
+Scaffold new components from a template:
+
+```
+.claude/skills/new-component/
+├── SKILL.md
+└── templates/
+    ├── component.tsx.template
+    ├── component.test.tsx.template
+    └── component.stories.tsx.template
+```
+
+**SKILL.md:**
+```yaml
+---
+name: new-component
+description: Scaffold a new React component with tests and stories
+disable-model-invocation: true
+---
+
+Create component: $ARGUMENTS
+
+Use templates in [templates/](templates/) directory:
+1. Generate component from component.tsx.template
+2. Generate tests from component.test.tsx.template
+3. Generate Storybook story from component.stories.tsx.template
+
+Replace {{ComponentName}} with the PascalCase name.
+Replace {{component-name}} with the kebab-case name.
+```
+
+---
+
+### PR Review with Checklist
+
+Review PRs against a project-specific checklist:
+
+```
+.claude/skills/pr-check/
+├── SKILL.md
+└── checklist.md
+```
+
+**SKILL.md:**
+```yaml
+---
+name: pr-check
+description: Review PR against project checklist
+disable-model-invocation: true
+context: fork
+---
+
+## PR Context
+- Diff: !`gh pr diff`
+- Description: !`gh pr view`
+
+Review against [checklist.md](checklist.md).
+
+For each item, mark ✅ or ❌ with explanation.
+```
+
+**checklist.md:**
+```markdown
+## PR Checklist
+
+- [ ] Tests added for new functionality
+- [ ] No console.log statements
+- [ ] Error handling includes user-facing messages
+- [ ] API changes are backwards compatible
+- [ ] Database migrations are reversible
+```
+
+---
+
+### Release Notes Generator
+
+Generate release notes from git history:
+
+**SKILL.md:**
+```yaml
+---
+name: release-notes
+description: Generate release notes from commits since last tag
+disable-model-invocation: true
+---
+
+## Recent Changes
+- Commits since last tag: !`git log $(git describe --tags --abbrev=0)..HEAD --oneline`
+- Last tag: !`git describe --tags --abbrev=0`
+
+Generate release notes:
+1. Group commits by type (feat, fix, docs, etc.)
+2. Write user-friendly descriptions
+3. Highlight breaking changes
+4. Format as markdown
+```
+
+---
+
+### Project Conventions (Claude-only)
+
+Background knowledge Claude applies automatically:
+
+**SKILL.md:**
+```yaml
+---
+name: project-conventions
+description: Code style and patterns for this project. Apply when writing or reviewing code.
+user-invocable: false
+---
+
+## Naming Conventions
+- React components: PascalCase
+- Utilities: camelCase
+- Constants: UPPER_SNAKE_CASE
+- Files: kebab-case
+
+## Patterns
+- Use `Result<T, E>` for fallible operations, not exceptions
+- Prefer composition over inheritance
+- All API responses use `{ data, error, meta }` shape
+
+## Forbidden
+- No `any` types
+- No `console.log` in production code
+- No synchronous file I/O
+```
+
+---
+
+### Environment Setup
+
+Onboard new developers with setup script:
+
+```
+.claude/skills/setup-dev/
+├── SKILL.md
+└── scripts/
+    └── check-prerequisites.sh
+```
+
+**SKILL.md:**
+```yaml
+---
+name: setup-dev
+description: Set up development environment for new contributors
+disable-model-invocation: true
+---
+
+Set up development environment:
+
+1. Check prerequisites: `bash scripts/check-prerequisites.sh`
+2. Install dependencies: `npm install`
+3. Copy environment template: `cp .env.example .env`
+4. Set up database: `npm run db:setup`
+5. Verify setup: `npm test`
+
+Report any issues encountered.
+```
+
+---
+
+## Argument Patterns
+
+| Pattern | Meaning | Example |
+|---------|---------|---------|
+| `$ARGUMENTS` | All args as string | `/deploy staging` → "staging" |
+
+Arguments are appended as `ARGUMENTS: <value>` if `$ARGUMENTS` isn't in the skill.
+
+## Dynamic Context Injection
+
+Use `!`command`` to inject live data before the skill runs:
+
+```yaml
+## Current State
+- Branch: !`git branch --show-current`
+- Status: !`git status --short`
+```
+
+The command output replaces the placeholder before Claude sees the skill content.

@@ -2,6 +2,8 @@
 
 MCP (Model Context Protocol) servers extend Claude's capabilities by connecting to external tools and services.
 
+**Note**: These are common MCP servers. Use web search to find MCP servers specific to the codebase's services and integrations.
+
 ## Setup & Team Sharing
 
 **Connection methods:**

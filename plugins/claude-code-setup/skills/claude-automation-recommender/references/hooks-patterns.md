@@ -1,6 +1,8 @@
 # Hooks Recommendations
 
-Hooks automatically run commands in response to Claude's tool usage. They're ideal for enforcement and automation that should happen consistently.
+Hooks automatically run commands in response to Claude Code events. They're ideal for enforcement and automation that should happen consistently.
+
+**Note**: These are common patterns. Use web search to find hooks for tools/frameworks not listed here to recommend the best hooks for the user.
 
 ## Auto-Formatting Hooks
 
@@ -132,6 +134,83 @@ Hooks automatically run commands in response to Claude's tool usage. They're ide
 | Lock files | Block lock file edits |
 | Go project | gofmt on Edit |
 | Rust project | rustfmt on Edit |
+
+---
+
+## Notification Hooks
+
+Notification hooks run when Claude Code sends notifications. Use matchers to filter by notification type.
+
+### Permission Alerts
+| Matcher | Use Case |
+|---------|----------|
+| `permission_prompt` | Alert when Claude requests permissions |
+
+**Recommend**: Play sound, send desktop notification, or log permission requests
+**Value**: Never miss permission prompts when multitasking
+
+### Idle Notifications
+| Matcher | Use Case |
+|---------|----------|
+| `idle_prompt` | Alert when Claude is waiting for input (60+ seconds idle) |
+
+**Recommend**: Play sound or send notification when Claude needs attention
+**Value**: Know when Claude is ready for your input
+
+### Example Configuration
+
+```json
+{
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Ping.aiff"
+          }
+        ]
+      },
+      {
+        "matcher": "idle_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude is waiting\" with title \"Claude Code\"'"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Available Matchers
+
+| Matcher | Triggers When |
+|---------|---------------|
+| `permission_prompt` | Claude needs permission for a tool |
+| `idle_prompt` | Claude waiting for input (60+ seconds) |
+| `auth_success` | Authentication succeeds |
+| `elicitation_dialog` | MCP tool needs input |
+
+---
+
+## Quick Reference: Detection → Recommendation
+
+| If You See | Recommend This Hook |
+|------------|-------------------|
+| Prettier config | Auto-format on Edit/Write |
+| ESLint config | Auto-lint on Edit/Write |
+| Ruff/Black config | Auto-format Python |
+| tsconfig.json | Type-check on Edit |
+| Test directory | Run related tests on Edit |
+| .env files | Block .env edits |
+| Lock files | Block lock file edits |
+| Go project | gofmt on Edit |
+| Rust project | rustfmt on Edit |
+| Multitasking workflow | Notification hooks for alerts |
 
 ---
 
